@@ -464,15 +464,15 @@ else {return 0;}
 
 
 void colorFlood(Frame* frm,int x, int y,RGB color){	
-if (isColorEqual(frm->px[x][y],color)==1){
-	//do nothing
-	} 
-else{
-	insertPixel(frm,coord(x,y),color);
-	colorFlood(frm,x+1,y,color);
-	colorFlood(frm,x,y+1,color);
-	colorFlood(frm,x-1,y,color);
-	colorFlood(frm,x,y-1,color);
+	if (isColorEqual(frm->px[x][y],color)==1){
+		//do nothing
+		} 
+	else{
+		insertPixel(frm,coord(x,y),color);
+		colorFlood(frm,x+1,y,color);
+		colorFlood(frm,x,y+1,color);
+		colorFlood(frm,x-1,y,color);
+		colorFlood(frm,x,y-1,color);
 	}	
 }
 
@@ -766,12 +766,12 @@ int main() {
 		
 		// draw ship
 		drawShip(&canvas, coord(shipXPosition,shipYPosition), rgb(99,99,99));
+		colorFlood(&canvas,shipXPosition,shipYPosition-1,rgb(99,99,99));
 		
 		//drawFish
-		drawFish(&canvas, coord(shipXPosition, shipYPosition), rgb(99,99,99));
-
-		//colorFlood
-		colorFlood(&canvas,shipXPosition,shipYPosition-1,rgb(99,99,99));
+		drawFish(&canvas, coord(shipXPosition, shipYPosition), rgb(87, 255, 92));
+		colorFlood(&canvas, shipXPosition, shipYPosition - 25,rgb(87, 255, 92));
+		//colorFlood(&canvas, shipXPosition+22, shipYPosition - 24,rgb(87, 255, 92));
 
 		// draw stickman and cannon
 		drawStickmanAndCannon(&canvas, coord(shipXPosition,shipYPosition), rgb(99,99,99), stickmanCounter++);
