@@ -371,13 +371,33 @@ vector<Coord> getBirdCoordinate(Coord center) {
 }
 
 void drawFish(Frame  *frame, Coord center, RGB color) {
-	vector<Coord> fishCoord = getFishCoordinate(coord(center.x-30,center.y-20));
+	/*vector<Coord> fishCoord = getFishCoordinate(coord(center.x-30,center.y-20));
 	for(int i=0;i<fishCoord.size();++i) {
 		if(i!=fishCoord.size()-1)
 			plotLine(frame,fishCoord.at(i).x, fishCoord.at(i).y ,fishCoord.at(i+1).x, fishCoord.at(i+1).y, color);
 		else
 			plotLine(frame, fishCoord.at(i).x, fishCoord.at(i).y ,fishCoord.at(0).x, fishCoord.at(0).y, color);
-	}
+	}*/
+	
+	//panjang badan 12
+	//tinggi 10
+	//panjang moncong 10
+	//draw mulut
+	plotLine(frame, center.x -15, center.y -25, center.x -5, center.y -30, color);
+	plotLine(frame, center.x -15, center.y -25, center.x -5, center.y -20, color);
+	
+	//draw badan
+	plotLine(frame, center.x -5, center.y -30, center.x + 7, center.y -30, color);
+	plotLine(frame, center.x -5, center.y -20, center.x + 7, center.y -20, color);
+	
+	//draw pangkal ekor
+	plotLine(frame, center.x + 7, center.y -30, center.x + 7, center.y -26, color);
+	plotLine(frame, center.x + 7, center.y -20, center.x + 7, center.y -24, color);
+	
+	//draw ekor
+	plotLine(frame, center.x + 7, center.y -26, center.x + 14, center.y -30, color);
+	plotLine(frame, center.x + 7, center.y -24, center.x + 14, center.y -20, color);
+	plotLine(frame, center.x + 14, center.y -30, center.x + 14, center.y -20, color);
 }
 
 /* FUNCTIONS FOR SCANLINE ALGORITHM ---------------------------------------------------- */
@@ -769,8 +789,10 @@ int main() {
 		colorFlood(&canvas,shipXPosition,shipYPosition-1,rgb(99,99,99));
 		
 		//drawFish
-		drawFish(&canvas, coord(shipXPosition, shipYPosition), rgb(87, 255, 92));
-		colorFlood(&canvas, shipXPosition, shipYPosition - 25,rgb(87, 255, 92));
+		drawFish(&canvas, coord(shipXPosition + 20, shipYPosition), rgb(87, 255, 92));
+		colorFlood(&canvas, shipXPosition + 20, shipYPosition - 25,rgb(87, 255, 92));
+		drawFish(&canvas, coord(shipXPosition - 20, shipYPosition), rgb(87, 255, 92));
+		colorFlood(&canvas, shipXPosition - 20, shipYPosition - 25,rgb(87, 255, 92));
 		//colorFlood(&canvas, shipXPosition+22, shipYPosition - 24,rgb(87, 255, 92));
 
 		// draw stickman and cannon
